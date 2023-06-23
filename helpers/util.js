@@ -1,6 +1,8 @@
 var jwt = require('jsonwebtoken');
 const models = require('../models');
 const secretKey = 'dean12'
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 class Response {
     constructor(data, success = true) {
@@ -26,5 +28,6 @@ module.exports = {
         }
     },
     Response,
-    secretKey
+    secretKey,
+    hashPassword : password => bcrypt.hashSync(password, saltRounds)
 }
