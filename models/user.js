@@ -5,6 +5,7 @@ const saltRounds = 10;
 const {
   Model
 } = require('sequelize');
+const { hashPassword } = require('../helpers/util');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -32,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
 
   // Implement Hooks For Hashing Password
   User.beforeCreate(async (user, options) => {
-    const hashedPassword = bcrypt.hashSync(user.password, saltRounds);
+    const hashedPassword = hashPassword(user.password);
     user.password = hashedPassword;
   });
 

@@ -22,7 +22,7 @@ router.post('/auth', async function (req, res, next) {
     res.json(new Response('Something Went Wrong', false))
   }
 });
-router.get('/', tokenValid, async function (req, res, next) {
+router.get('/', async function (req, res, next) {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = 3;
@@ -40,7 +40,7 @@ router.get('/', tokenValid, async function (req, res, next) {
     res.json({ error })
   }
 });
-router.post('/',tokenValid, async function (req, res, next) {
+router.post('/', async function (req, res, next) {
   try {
     const user = await models.User.create({
       email: req.body.email,
